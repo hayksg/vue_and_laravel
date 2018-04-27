@@ -29,13 +29,13 @@
             login() {
                 var data = {
                     client_id: 2,
-                    client_secret: 'RUvyEteSAm0U3U0K4wHbKzyNXP1rL9Whs1kSp5CO',
+                    client_secret: 'Ds5XnpzCdedIHL2uO7Ci0ne7HFwbE2z2xdpVCYN4',
                     grant_type: 'password',
                     username: this.email,
                     password: this.password
                 }
 
-                this.$http.post('http://test.loc/oauth/token', data)
+                this.$http.post('oauth/token', data)
                     .then(response => {
                         this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now());
 

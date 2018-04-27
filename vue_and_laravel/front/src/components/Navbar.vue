@@ -11,10 +11,7 @@
                     <ul class="navbar-nav">
                 
                         <li class="nav-item">
-                            <a class="nav-link" href="../help/">Help</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://blog.bootswatch.com">Blog</a>
+                            <a class="nav-link" href="/#/feed">Products</a>
                         </li>
 
                     </ul>
