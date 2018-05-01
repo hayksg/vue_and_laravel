@@ -1,31 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Login from './components/authentication/Login.vue'
-import Register from './components/authentication/Register.vue'
-import Feed from './components/Feed.vue'
-
 Vue.use(VueRouter);
 
 const router = new VueRouter({
     routes: [
         {
             path: "/login",
-            component: Login,
+            component: require('./components/authentication/Login.vue').default,
             meta: {
                 forVisitors: true
             }
         },
         {
             path: "/register",
-            component: Register,
+            component: require('./components/authentication/Register.vue').default,
             meta: {
                 forVisitors: true
             }
         },
         {
             path: "/feed",
-            component: Feed,
+            component: require('./components/Feed.vue').default,
+            meta: {
+                forAuth: true
+            }
+        },
+        {
+            path: "/products/create",
+            component: require('./components/product/Create.vue').default,
             meta: {
                 forAuth: true
             }
