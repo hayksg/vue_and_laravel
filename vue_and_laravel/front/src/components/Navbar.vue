@@ -42,7 +42,19 @@
         },
 
         created() {
-            this.isAuth = this.$auth.isAuthenticated()
+            this.isAuth = this.$auth.isAuthenticated();
+            this.setAuthenticatedUser();
+        },
+
+        methods: {
+            setAuthenticatedUser() {
+                this.$http.get('api/user')
+                    .then(response => {
+                        this.$auth.setAuthenticatedUser(response.body)
+
+                        console.log(this.$auth.getAuthenticatedUser());
+                    })
+            }
         }
     }
 </script>

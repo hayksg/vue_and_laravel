@@ -29,7 +29,7 @@
             login() {
                 var data = {
                     client_id: 2,
-                    client_secret: 'Ds5XnpzCdedIHL2uO7Ci0ne7HFwbE2z2xdpVCYN4',
+                    client_secret: '8ZoSJVsACY43dSpdHMACgYzQ6yLNetHTUcIL3jEe',
                     grant_type: 'password',
                     username: this.email,
                     password: this.password

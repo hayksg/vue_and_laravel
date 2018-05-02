@@ -4,6 +4,8 @@
             <img src="http://images.amazon.com/images/G/01/electronics/detail-page/hp-a67xx-hero_monitor.jpg" class="img-fluid">
 
             <div class="card-body">
+                {{ product.user_id }}
+
                 <h4>{{ product.name }}</h4>
                 <p>${{ product.price }}</p>
                 <hr>
@@ -18,6 +20,6 @@
 
 <script>
     export default {
-        props: ['product']
+        props: ['product', 'authenticatedUser']
     }
 </script>
