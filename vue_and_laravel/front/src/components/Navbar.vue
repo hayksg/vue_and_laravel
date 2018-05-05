@@ -18,8 +18,13 @@
                         <router-link to="/login" tag="li" class="nav-item" v-if="!isAuth">
                             <a class="nav-link">Login</a>
                         </router-link>
+
                         <router-link to="/register" tag="li" class="nav-item" v-if="!isAuth">
                             <a class="nav-link">Register</a>
+                        </router-link>
+
+                        <router-link to="/products/create" tag="li" class="nav-item" v-if="isAuth">
+                            <a class="nav-link">Create</a>
                         </router-link>
 
                         <router-link to="/logout" tag="li" class="nav-item" v-if="isAuth">
@@ -51,8 +56,6 @@
                 this.$http.get('api/user')
                     .then(response => {
                         this.$auth.setAuthenticatedUser(response.body)
-
-                        console.log(this.$auth.getAuthenticatedUser());
                     })
             }
         }
