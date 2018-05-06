@@ -27,4 +27,17 @@ class ProductsController extends Controller
     		return response(['Problem deleting the product'], 500);
     	}
     }
+
+    public function show($id)
+    {
+    	return response()->json(Product::find($id));
+    }
+
+    public function update($id)
+    {
+    	$product = Product::find($id);
+    	$product->update(request()->all());
+
+    	return response()->json($product);
+    }
 }

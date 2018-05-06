@@ -14,6 +14,11 @@
                 <hr>
                 <p v-if="product.user_id == authenticatedUser.id" class="text-center delete-button">
                     <a href="#" class="btn btn-danger" role="button" @click.prevent="$emit('delete-product')">Delete</a>
+
+
+                    <router-link :to="'/products/' + product.id + '/edit'" class="btn btn-outline-success">
+                        Edit 
+                    </router-link>
                 </p>
             </div>
         </div>
