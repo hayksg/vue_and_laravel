@@ -30,7 +30,14 @@ class ProductsController extends Controller
 
     public function show($id)
     {
-    	return response()->json(Product::find($id));
+    	$product = Product::find($id);
+
+    	if ($product) {
+    		return response()->json($product);
+    	}
+
+    	return response()->json(['error' => 'Resource not found!'], 404);
+    	
     }
 
     public function update($id)
