@@ -2,16 +2,34 @@
     <div class="row">
         <div class="col-md-8">
             <h4 class="mb-4">Create product</h4>
-            <form>
+            <form v-on:submit.prevent="create">
+                <div class="form-group">Image:
+                    <div class="custom-file mt-2">
+                        <input id="logo" type="file" class="custom-file-input" @change="imageChanged">
+                        <label for="logo" class="custom-file-label">Choose file...</label>
+                    </div>       
+                </div>       
 
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" v-model="product.name">
+                    <input type="text" 
+                           class="form-control" 
+                           id="name"   
+                           name="name"
+                           v-validate="'required'"
+                           v-model="product.name">
+                    <div class="help-block alert alert-danger" v-show="errors.has('name')">{{ errors.first('name') }}</div>
                 </div>
 
                 <div class="form-group">
                     <label for="price">Price:</label>
-                    <input type="number" class="form-control" id="price" v-model="product.price">
+                    <input type="number" 
+                           class="form-control" 
+                           name="price"
+                           id="price" 
+                           v-validate="'min_value:1|max_value:50'"
+                           v-model="product.price">
+                    <div class="help-block alert alert-danger" v-show="errors.has('price')">{{ errors.first('price') }}</div>
                 </div>
 
                 <div class="form-group">
@@ -20,9 +38,12 @@
                 </div>
 
                 <div class="form-group">
+                    <!--
                     <button type="button" class="btn btn-outline-success" v-show="product.name && product.price > 0 && product.description" @click="create">
                         Create
                     </button>
+                    -->
+                    <input type="submit" value="Create" class="btn btn-outline-success">
                 </div>
 
             </form>
@@ -37,16 +58,36 @@
                 product: {
                     name: '',
                     price: 0,
-                    description: ''
+                    description: '',
+                    image: ''
                 }
+
             }
         },
         methods: {
+            imageChanged(e) {
+                var fileReader = new FileReader();
+
+                fileReader.readAsDataURL(e.target.files[0]);
+
+                fileReader.onload = (e) => {
+                    this.product.image = e.target.result;
+                }
+            },
+
             create() {
-                this.$http.post('api/products', this.product)
-                    .then(response => {
-                        this.$router.push('/feed'); // redirect to route feed
-                    });
+                this.$validator.validate().then(result => {
+                    if (!result) {
+                        //alert('Fill the form please');
+                        swal("Oops!", "Fill the form please", "error");
+                    } else {
+                        this.$http.post('api/products', this.product)
+                            .then(response => {
+                            this.$router.push('/feed'); // redirect to route feed
+                        });
+                    }
+                });
+                
             }
         }
     }
